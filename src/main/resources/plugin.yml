@@ -1,0 +1,106 @@
+main: xyz.bugsum.collector.Collector
+version: ${version}
+name: Collector
+author: Samarth Sharma
+api-version: "1.21"
+softdepend:
+  [Vault, PlaceholderAPI, WorldGuard, EconomyShopGUI, EconomyShopGUI-Premium]
+description: Hopper-based item & XP Collector with sub-GUIs, holograms and multi-language support.
+
+commands:
+  collector:
+    description: Main Collector plugin command.
+    usage: /<command> <give|reload|info|wipe> ...
+    aliases: [col, collectors]
+    permission: collector.use
+
+permissions:
+  collector.*:
+    description: All Collector permissions.
+    default: op
+    children:
+      collector.use: true
+      collector.upgrade: true
+      collector.upgrade.speed: true
+      collector.upgrade.range: true
+      collector.upgrade.capacity: true
+      collector.toggles: true
+      collector.toggle.autosell: true
+      collector.toggle.autosmelt: true
+      collector.toggle.xp: true
+      collector.toggle.hologram: true
+      collector.xp: true
+      collector.xp.withdraw: true
+      collector.filter: true
+      collector.rename: true
+      collector.friend.use: true
+      collector.friend.manage: true
+      collector.admin: true
+      collector.give: true
+      collector.bypass.limit: true
+      collector.bypass.chunklimit: true
+      collector.bypass.pickuplimit: true
+
+  collector.use:
+    description: Open the main Collector menu.
+    default: true
+  collector.upgrade:
+    description: Open the Upgrades sub-GUI.
+    default: true
+  collector.upgrade.speed:
+    description: Purchase Speed upgrades.
+    default: true
+  collector.upgrade.range:
+    description: Purchase Range upgrades.
+    default: true
+  collector.upgrade.capacity:
+    description: Purchase Capacity upgrades.
+    default: true
+  collector.toggles:
+    description: Open the Toggles sub-GUI.
+    default: true
+  collector.toggle.autosell:
+    description: Toggle Auto-Sell.
+    default: true
+  collector.toggle.autosmelt:
+    description: Toggle Auto-Smelt.
+    default: true
+  collector.toggle.xp:
+    description: Toggle XP collection.
+    default: true
+  collector.toggle.hologram:
+    description: Toggle the floating hologram.
+    default: true
+  collector.xp:
+    description: Open the XP Bank sub-GUI.
+    default: true
+  collector.xp.withdraw:
+    description: Withdraw stored XP from a Collector.
+    default: true
+  collector.filter:
+    description: Open the Filter sub-GUI.
+    default: true
+  collector.rename:
+    description: Rename a Collector you own.
+    default: true
+  collector.friend.use:
+    description: Use a Collector you have been added to as a friend.
+    default: true
+  collector.friend.manage:
+    description: Add or remove friends on a Collector you own.
+    default: true
+  collector.admin:
+    description: Admin operations (reload, wipe, pickup any).
+    default: op
+  collector.give:
+    description: Use /collector give.
+    default: op
+  collector.bypass.limit:
+    description: Bypass max-collectors-per-player limit.
+    default: op
+  collector.bypass.chunklimit:
+    description: Bypass the one-Collector-per-chunk rule.
+    default: op
+  collector.bypass.pickuplimit:
+    description: Pick up a Collector even when storage exceeds the configured limit.
+    default: op

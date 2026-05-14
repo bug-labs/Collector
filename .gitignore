@@ -1,0 +1,9 @@
+/build
+/bin
+.vscode
+.gradle
+.claude
+ESGUI_wiki.md
+gradlew
+gradlew.bat
+gradle

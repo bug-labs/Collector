@@ -1,0 +1,70 @@
+# =============================================================
+#                   Collector — config.yml
+# =============================================================
+# Every behavior is configurable. See also: tiers.yml, gui.yml, lang/*.yml.
+# =============================================================
+
+# Active language. Drop a custom <code>.yml file into the lang/ folder
+# (created on first run) and set this to the file's name (without .yml).
+# Bundled: en, de, es, fr.
+language: en
+
+collection:
+  # Whether the Collector also absorbs experience orbs (per-collector toggle remains).
+  xp-enabled: true
+  # Bukkit only exposes Chunk#getEntities(), so this radius is informational only —
+  # the per-tier "range" setting (in chunks) controls actual scan area.
+  xp-scan-radius: 8
+
+limits:
+  # -1 = no limit
+  max-collectors-per-player: 10
+  # Worlds in which Collectors cannot be placed.
+  blocked-worlds: []
+  # Block placing more than one Collector inside the same chunk.
+  one-per-chunk: true
+  # Refuse pickup when storage holds more than this many items total.
+  # Prevents lag spikes from dumping huge stacks on the floor at once.
+  # -1 disables the check. Bypass perm: collector.bypass.pickuplimit
+  pickup-max-items: 100000
+
+hologram:
+  enabled: true
+  # Block-relative Y offset for the TextDisplay (1.4 = just above the hopper rim).
+  y-offset: 1.4
+  # How often the floating text refreshes (ticks). 40 = 2s.
+  refresh-interval-ticks: 40
+
+visuals:
+  place:
+    particle: HAPPY_VILLAGER
+    sound: BLOCK_AMETHYST_BLOCK_CHIME
+  link:
+    particle: ENCHANT
+    sound: BLOCK_BEACON_ACTIVATE
+  upgrade:
+    particle: WAX_ON
+    sound: ENTITY_PLAYER_LEVELUP
+  full-storage:
+    particle: SMOKE
+    sound: BLOCK_NOTE_BLOCK_BASS
+  pickup:
+    particle: NONE
+    sound: NONE
+
+database:
+  file: data.db
+  threads: 1
+  # How often (in ticks) the async batched flush runs. 100 ticks = 5s.
+  flush-interval-ticks: 100
+
+hooks:
+  vault: true
+  placeholderapi: true
+  # EconomyShopGUI / EconomyShopGUI-Premium are auto-detected.
+  economyshopgui: true
+  worldguard:
+    enabled: false
+    flag: collector-place
+
+debug: false

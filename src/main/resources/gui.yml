@@ -1,0 +1,235 @@
+# =============================================================
+#                         GUI layout
+# =============================================================
+# Each top-level section (main, upgrades, settings, xp, common, filter)
+# defines:
+#   title         — top bar (MiniMessage)
+#   filler        — background pane (only in main)
+#   buttons.<key> — material/name/lore. Slot is fixed in code.
+#
+# Available <placeholders> in titles, names, lores:
+#   main:      <name> <owner> <items> <money> <xp> <friends>
+#              <tier_speed> <tier_range> <tier_capacity>
+#   upgrades:  <tier> <max> <value> <next_price>
+#   settings:  <enabled> <name> <friends> <mode>
+#   xp:        <xp>
+#   nav:       <page> <total>
+# =============================================================
+
+main:
+  title: "<gold><bold>⛁ <name></bold>"
+  filler:
+    material: BLACK_STAINED_GLASS_PANE
+    name: " "
+  buttons:
+    upgrades:
+      material: NETHER_STAR
+      name: "<aqua><bold>ᴜᴘɢʀᴀᴅᴇѕ"
+      lore:
+        - "<dark_gray>━━━━━━━━━━━━━━━━━━━━"
+        - ""
+        - "<gray>ɪᴍᴘʀᴏᴠᴇ ѕᴘᴇᴇᴅ, ʀᴀɴɢᴇ ᴀɴᴅ ᴄᴀᴘᴀᴄɪᴛʏ."
+        - ""
+        - "<gold>▶ <yellow>ᴄʟɪᴄᴋ ᴛᴏ ᴏᴘᴇɴ"
+        - "<dark_gray>━━━━━━━━━━━━━━━━━━━━"
+    toggles:
+      material: COMPARATOR
+      name: "<light_purple><bold>ѕᴇᴛᴛɪɴɢѕ"
+      lore:
+        - "<dark_gray>━━━━━━━━━━━━━━━━━━━━"
+        - ""
+        - "<gray>ᴀᴜᴛᴏ-ѕᴇʟʟ, ᴀᴜᴛᴏ-ѕᴍᴇʟᴛ, xᴘ,"
+        - "<gray>ʜᴏʟᴏɢʀᴀᴍ, ʀᴇɴᴀᴍᴇ, ғʀɪᴇɴᴅѕ, ғɪʟᴛᴇʀ."
+        - ""
+        - "<gold>▶ <yellow>ᴄʟɪᴄᴋ ᴛᴏ ᴏᴘᴇɴ"
+        - "<dark_gray>━━━━━━━━━━━━━━━━━━━━"
+    xp:
+      material: EXPERIENCE_BOTTLE
+      name: "<green><bold>xᴘ ʙᴀɴᴋ"
+      lore:
+        - "<dark_gray>━━━━━━━━━━━━━━━━━━━━"
+        - ""
+        - "<gray>ѕᴛᴏʀᴇᴅ: <green><xp></green>"
+        - ""
+        - "<gold>▶ <yellow>ᴄʟɪᴄᴋ ᴛᴏ ᴡɪᴛʜᴅʀᴀᴡ"
+        - "<dark_gray>━━━━━━━━━━━━━━━━━━━━"
+    info:
+      material: PAPER
+      name: "<yellow><bold>ѕᴛᴀᴛɪѕᴛɪᴄѕ"
+      lore:
+        - "<dark_gray>━━━━━━━━━━━━━━━━━━━━"
+        - ""
+        - "<gray>ᴄᴏʟʟᴇᴄᴛᴇᴅ: <yellow><items></yellow>"
+        - "<gray>ᴇᴀʀɴᴇᴅ:    <yellow>$<money></yellow>"
+        - "<gray>xᴘ ѕᴛᴏʀᴇᴅ: <green><xp></green>"
+        - ""
+        - "<dark_gray>━━━━━━━━━━━━━━━━━━━━"
+    prev:
+      material: ARROW
+      name: "<gray>« ᴘʀᴇᴠɪᴏᴜѕ ᴘᴀɢᴇ <dark_gray>(<page>/<total>)"
+      lore:
+        - "<dark_gray>ᴄʟɪᴄᴋ ғᴏʀ ᴘʀᴇᴠɪᴏᴜѕ ᴘᴀɢᴇ."
+    next:
+      material: ARROW
+      name: "<gray>ɴᴇxᴛ ᴘᴀɢᴇ » <dark_gray>(<page>/<total>)"
+      lore:
+        - "<dark_gray>ᴄʟɪᴄᴋ ғᴏʀ ɴᴇxᴛ ᴘᴀɢᴇ."
+    close:
+      material: BARRIER
+      name: "<red><bold>ᴄʟᴏѕᴇ"
+      lore:
+        - "<dark_gray>ᴄʟᴏѕᴇ ᴛʜᴇ ᴍᴇɴᴜ."
+
+upgrades:
+  title: "<gold><bold>⚙ ᴜᴘɢʀᴀᴅᴇѕ"
+  buttons:
+    speed:
+      material: SUGAR
+      name: "<yellow><bold>ѕᴘᴇᴇᴅ"
+      lore:
+        - "<dark_gray>━━━━━━━━━━━━━━━━━━━━"
+        - ""
+        - "<gray>ᴛɪᴇʀ:     <yellow><tier></yellow><dark_gray>/<max>"
+        - "<gray>ɪɴᴛᴇʀᴠᴀʟ: <yellow><value> ᴛɪᴄᴋѕ</yellow>"
+        - ""
+        - "<gold>▶ <yellow>ᴄʟɪᴄᴋ ᴛᴏ ᴜᴘɢʀᴀᴅᴇ <gray>—<gold> $<next_price>"
+        - "<dark_gray>━━━━━━━━━━━━━━━━━━━━"
+    range:
+      material: SPYGLASS
+      name: "<aqua><bold>ʀᴀɴɢᴇ"
+      lore:
+        - "<dark_gray>━━━━━━━━━━━━━━━━━━━━"
+        - ""
+        - "<gray>ᴛɪᴇʀ: <yellow><tier></yellow><dark_gray>/<max>"
+        - "<gray>ᴘɪᴄᴋᴜᴘ ᴢᴏɴᴇ: <yellow><value> ᴄʜᴜɴᴋѕ</yellow>"
+        - ""
+        - "<gold>▶ <yellow>ᴄʟɪᴄᴋ ᴛᴏ ᴜᴘɢʀᴀᴅᴇ <gray>—<gold> $<next_price>"
+        - "<dark_gray>━━━━━━━━━━━━━━━━━━━━"
+    capacity:
+      material: ENDER_CHEST
+      name: "<light_purple><bold>ᴄᴀᴘᴀᴄɪᴛʏ"
+      lore:
+        - "<dark_gray>━━━━━━━━━━━━━━━━━━━━"
+        - ""
+        - "<gray>ᴛɪᴇʀ: <yellow><tier></yellow><dark_gray>/<max>"
+        - "<gray>ᴅɪѕᴛɪɴᴄᴛ ɪᴛᴇᴍѕ: <yellow><value></yellow>"
+        - ""
+        - "<gold>▶ <yellow>ᴄʟɪᴄᴋ ᴛᴏ ᴜᴘɢʀᴀᴅᴇ <gray>—<gold> $<next_price>"
+        - "<dark_gray>━━━━━━━━━━━━━━━━━━━━"
+
+# Settings GUI (held in TogglesGUI.java for code-compatibility).
+settings:
+  title: "<light_purple><bold>⚙ ѕᴇᴛᴛɪɴɢѕ"
+  buttons:
+    autosell:
+      material: GOLD_INGOT
+      name: "<gold><bold>ᴀᴜᴛᴏ-ѕᴇʟʟ <gray>— <enabled>"
+      lore:
+        - "<dark_gray>━━━━━━━━━━━━━━━━━━━━"
+        - "<gray>ѕᴇʟʟ ᴄᴏʟʟᴇᴄᴛᴇᴅ ɪᴛᴇᴍѕ ᴠɪᴀ ᴠᴀᴜʟᴛ."
+        - "<dark_gray>ᴄʟɪᴄᴋ ᴛᴏ ᴛᴏɢɢʟᴇ."
+        - "<dark_gray>━━━━━━━━━━━━━━━━━━━━"
+    autosmelt:
+      material: BLAST_FURNACE
+      name: "<red><bold>ᴀᴜᴛᴏ-ѕᴍᴇʟᴛ <gray>— <enabled>"
+      lore:
+        - "<dark_gray>━━━━━━━━━━━━━━━━━━━━"
+        - "<gray>ѕᴍᴇʟᴛ ɪᴛᴇᴍѕ ᴀѕ ᴛʜᴇʏ ᴀʀᴇ ᴘɪᴄᴋᴇᴅ ᴜᴘ."
+        - "<dark_gray>ᴄʟɪᴄᴋ ᴛᴏ ᴛᴏɢɢʟᴇ."
+        - "<dark_gray>━━━━━━━━━━━━━━━━━━━━"
+    xp:
+      material: EXPERIENCE_BOTTLE
+      name: "<green><bold>xᴘ ᴄᴏʟʟᴇᴄᴛ <gray>— <enabled>"
+      lore:
+        - "<dark_gray>━━━━━━━━━━━━━━━━━━━━"
+        - "<gray>ᴀʙѕᴏʀʙ xᴘ ᴏʀʙѕ ɪɴᴛᴏ ᴛʜᴇ ʙᴀɴᴋ."
+        - "<dark_gray>ᴄʟɪᴄᴋ ᴛᴏ ᴛᴏɢɢʟᴇ."
+        - "<dark_gray>━━━━━━━━━━━━━━━━━━━━"
+    hologram:
+      material: ARMOR_STAND
+      name: "<aqua><bold>ʜᴏʟᴏɢʀᴀᴍ <gray>— <enabled>"
+      lore:
+        - "<dark_gray>━━━━━━━━━━━━━━━━━━━━"
+        - "<gray>ѕʜᴏᴡ ᴛʜᴇ ғʟᴏᴀᴛɪɴɢ ᴅɪѕᴘʟᴀʏ."
+        - "<dark_gray>ᴄʟɪᴄᴋ ᴛᴏ ᴛᴏɢɢʟᴇ."
+        - "<dark_gray>━━━━━━━━━━━━━━━━━━━━"
+    rename:
+      material: NAME_TAG
+      name: "<gold><bold>ʀᴇɴᴀᴍᴇ"
+      lore:
+        - "<dark_gray>━━━━━━━━━━━━━━━━━━━━"
+        - "<gray>ᴄᴜʀʀᴇɴᴛ: <yellow><name></yellow>"
+        - ""
+        - "<gold>▶ <yellow>ᴄʟɪᴄᴋ ᴛᴏ ʀᴇɴᴀᴍᴇ"
+        - "<dark_gray>━━━━━━━━━━━━━━━━━━━━"
+    friends:
+      material: PLAYER_HEAD
+      name: "<aqua><bold>ғʀɪᴇɴᴅѕ"
+      lore:
+        - "<dark_gray>━━━━━━━━━━━━━━━━━━━━"
+        - "<gray>ᴀᴄᴄᴇѕѕ ɢʀᴀɴᴛᴇᴅ ᴛᴏ:"
+        - "<yellow><friends></yellow> <gray>ᴘʟᴀʏᴇʀ(ѕ)"
+        - ""
+        - "<gold>▶ <yellow>ᴄʟɪᴄᴋ ᴛᴏ ᴀᴅᴅ/ʀᴇᴍᴏᴠᴇ"
+        - "<dark_gray>━━━━━━━━━━━━━━━━━━━━"
+    filter:
+      material: HOPPER
+      name: "<aqua><bold>ғɪʟᴛᴇʀ <gray>— <yellow><mode>"
+      lore:
+        - "<dark_gray>━━━━━━━━━━━━━━━━━━━━"
+        - "<gray>ᴄʜᴏᴏѕᴇ ᴡʜɪᴄʜ ɪᴛᴇᴍѕ"
+        - "<gray>ᴀʀᴇ ᴄᴏʟʟᴇᴄᴛᴇᴅ."
+        - ""
+        - "<gold>▶ <yellow>ᴄʟɪᴄᴋ ᴛᴏ ᴏᴘᴇɴ"
+        - "<dark_gray>━━━━━━━━━━━━━━━━━━━━"
+
+xp:
+  title: "<green><bold>✦ xᴘ ʙᴀɴᴋ"
+  buttons:
+    info:
+      material: EXPERIENCE_BOTTLE
+      name: "<green><bold>ѕᴛᴏʀᴇᴅ xᴘ"
+      lore:
+        - "<dark_gray>━━━━━━━━━━━━━━━━━━━━"
+        - "<gray>ʙᴀʟᴀɴᴄᴇ: <yellow><xp></yellow>"
+        - "<dark_gray>━━━━━━━━━━━━━━━━━━━━"
+    withdraw-level:
+      material: GLASS_BOTTLE
+      name: "<aqua><bold>ᴡɪᴛʜᴅʀᴀᴡ 1 ʟᴇᴠᴇʟ"
+      lore:
+        - "<dark_gray>━━━━━━━━━━━━━━━━━━━━"
+        - "<gray>ᴛᴀᴋᴇ ᴇɴᴏᴜɢʜ xᴘ ᴛᴏ"
+        - "<gray>ᴀᴅᴠᴀɴᴄᴇ ᴏɴᴇ ʟᴇᴠᴇʟ."
+        - ""
+        - "<gold>▶ <yellow>ᴄʟɪᴄᴋ ᴛᴏ ᴡɪᴛʜᴅʀᴀᴡ"
+        - "<dark_gray>━━━━━━━━━━━━━━━━━━━━"
+    withdraw-all:
+      material: GLOWSTONE_DUST
+      name: "<gold><bold>ᴡɪᴛʜᴅʀᴀᴡ ᴀʟʟ"
+      lore:
+        - "<dark_gray>━━━━━━━━━━━━━━━━━━━━"
+        - "<gray>ʙᴀʟᴀɴᴄᴇ: <yellow><xp></yellow>"
+        - ""
+        - "<gold>▶ <yellow>ᴄʟɪᴄᴋ ᴛᴏ ᴡɪᴛʜᴅʀᴀᴡ"
+        - "<dark_gray>━━━━━━━━━━━━━━━━━━━━"
+
+common:
+  buttons:
+    back:
+      material: ARROW
+      name: "<gray>« ʙᴀᴄᴋ"
+      lore:
+        - "<dark_gray>ʀᴇᴛᴜʀɴ ᴛᴏ ᴛʜᴇ ᴍᴀɪɴ ᴍᴇɴᴜ."
+
+filter:
+  title: "<aqua><bold>ɪᴛᴇᴍ ғɪʟᴛᴇʀ"
+  rows: 6
+  mode-button:
+    slot: 49
+    material: COMPARATOR
+    name: "<aqua>ᴍᴏᴅᴇ: <yellow><mode>"
+    lore:
+      - "<dark_gray>━━━━━━━━━━━━━━━━━━━━"
+      - "<gray>ᴄʟɪᴄᴋ ᴛᴏ ᴄʏᴄʟᴇ:"
+      - "<gray>ɴᴏɴᴇ → ᴡʜɪᴛᴇʟɪѕᴛ → ʙʟᴀᴄᴋʟɪѕᴛ"
+      - "<dark_gray>━━━━━━━━━━━━━━━━━━━━"

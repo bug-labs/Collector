@@ -1,0 +1,73 @@
+# =============================================================
+#                  Deutsch (de) — Sprachdatei
+# =============================================================
+
+prefix: "<gold><bold>Collector</bold> <dark_gray>»</dark_gray> "
+
+general:
+  no-permission: "<red>Du hast keine Berechtigung dafür."
+  player-only: "<red>Dieser Befehl ist nur für Spieler."
+  reload-success: "<green>Konfigurationen neu geladen."
+  unknown-subcommand: "<red>Unbekannter Unterbefehl. /collector <give|reload|info|wipe>"
+
+place:
+  success: "<green>Collector platziert. Rechtsklick öffnet das Menü, Schleichen + Linksklick zum Aufheben."
+  blocked-world: "<red>In dieser Welt können keine Collectors platziert werden."
+  limit-reached: "<red>Du hast dein Collector-Limit erreicht (<yellow><limit></yellow>)."
+  chunk-occupied: "<red>In diesem Chunk gibt es bereits einen Collector."
+
+break:
+  success: "<gray>Collector aufgehoben. Inhalt wurde fallen gelassen."
+  unbreakable: "<red>Dieser Collector kann nicht zerstört werden. <gray>Schleichen + Linksklick zum Aufheben."
+  not-owner: "<red>Nur der Besitzer kann diesen Collector aufheben."
+
+upgrade:
+  cant-afford: "<red>Nicht genug Geld. Benötigt <yellow>$<price></yellow>."
+  max-tier: "<gold>Dieses Upgrade ist bereits auf maximaler Stufe."
+  success: "<green><yellow><track></yellow> auf Stufe <yellow><tier></yellow> verbessert!"
+  toggled-on: "<green><feature> aktiviert."
+  toggled-off: "<gray><feature> deaktiviert."
+
+filter:
+  whitelist: "<aqua>Filter auf WHITELIST gesetzt."
+  blacklist: "<aqua>Filter auf BLACKLIST gesetzt."
+  none: "<aqua>Filter deaktiviert."
+
+economy:
+  unavailable: "<red>Kein Preis für diesen Gegenstand verfügbar."
+  sold: "<green>Verkauft für <yellow>$<amount></yellow>."
+
+xp:
+  empty: "<red>Dieser Collector hat keine gespeicherten EP."
+  withdrew: "<green><yellow><amount></yellow> EP vom Collector abgehoben."
+
+storage:
+  empty-slot: "<dark_gray>Leer"
+  slot-name: "<white><material> <gray>x<yellow><amount></yellow>"
+  slot-lore:
+    - "<dark_gray>───────────────"
+    - "<gray>Linksklick  <dark_gray>» <white>64 nehmen"
+    - "<gray>Shift-Klick <dark_gray>» <white>Maximum nehmen"
+    - "<gray>Rechtsklick <dark_gray>» <white>1 nehmen"
+    - "<gray>Shift+Rechts <dark_gray>» <gold>Stapel verkaufen"
+    - "<dark_gray>───────────────"
+
+hologram:
+  lines:
+    - "<gold><bold>⛁ Collector</bold>"
+    - "<gray>Besitzer: <yellow><owner></yellow>"
+    - "<gray>Items: <yellow><items></yellow>  <gray>EP: <green><xp></green>"
+    - "<gray>$<money></gray>"
+
+items:
+  collector:
+    name: "<gold><bold>⛁ Collector</bold> <gray>[Stufe <yellow><tier_capacity></yellow>]"
+    lore:
+      - "<dark_gray>» <gray>Sammelt fallengelassene Items in der Nähe."
+      - ""
+      - "<gray>Tempo:     <yellow>Stufe <tier_speed>"
+      - "<gray>Reichweite:<yellow>Stufe <tier_range>"
+      - "<gray>Kapazität: <yellow>Stufe <tier_capacity>"
+      - ""
+      - "<dark_gray>Rechtsklick zum Öffnen."
+      - "<dark_gray>Schleichen + Linksklick zum Aufheben."
