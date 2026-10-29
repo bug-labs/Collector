@@ -1,0 +1,105 @@
+# Settings menu: the abilities a collector can have switched on.
+#
+# Placeholders in a setting's item: <ability> <state> <earnings> <sold>
+
+title: "<lang:gui.settings.title>"
+rows: 3
+
+content-character: "#"
+layout:
+  - "DDDDDDDDD"
+  - "D       D"
+  - "DDDTBDDDD"
+
+# slot           where the toggle is drawn
+# enabled-icon   item shown while the ability is on
+# disabled-icon  item shown while it is off
+# locked-icon    item shown when the player lacks riftcollector.ability.<name>
+settings:
+  auto-sell:
+    slot: 11
+    enabled-icon: SE
+    disabled-icon: SD
+    locked-icon: L
+  auto-smelt:
+    slot: 13
+    enabled-icon: ME
+    disabled-icon: MD
+    locked-icon: L
+  hologram:
+    slot: 15
+    enabled-icon: HE
+    disabled-icon: HD
+    locked-icon: L
+
+items:
+  D:
+    material: GRAY_STAINED_GLASS_PANE
+    hide-tooltip: true
+
+  B:
+    material: ARROW
+    name: "<lang:gui.back.name>"
+    action: back
+
+  T:
+    material: PLAYER_HEAD
+    name: "<lang:gui.collector.trust.name>"
+    lore:
+      - "<lang:gui.collector.trust.lore-1>"
+      - "<lang:gui.collector.trust.lore-2>"
+      - ""
+      - "<lang:gui.collector.trust.lore-3>"
+    action: open-trust
+
+  SE:
+    material: GOLD_INGOT
+    glow: true
+    name: "<lang:ability.auto-sell.name>"
+    lore:
+      - "<lang:gui.settings.state>"
+      - "<lang:gui.settings.earnings>"
+      - "<lang:gui.settings.toggle>"
+  SD:
+    material: GOLD_NUGGET
+    name: "<lang:ability.auto-sell.name>"
+    lore:
+      - "<lang:gui.settings.state>"
+      - "<lang:gui.settings.earnings>"
+      - "<lang:gui.settings.toggle>"
+
+  ME:
+    material: BLAST_FURNACE
+    glow: true
+    name: "<lang:ability.auto-smelt.name>"
+    lore:
+      - "<lang:gui.settings.state>"
+      - "<lang:gui.settings.toggle>"
+  MD:
+    material: FURNACE
+    name: "<lang:ability.auto-smelt.name>"
+    lore:
+      - "<lang:gui.settings.state>"
+      - "<lang:gui.settings.toggle>"
+
+  HE:
+    material: ITEM_FRAME
+    glow: true
+    name: "<lang:ability.hologram.name>"
+    lore:
+      - "<lang:gui.settings.state>"
+      - "<lang:gui.settings.toggle>"
+  HD:
+    material: ITEM_FRAME
+    name: "<lang:ability.hologram.name>"
+    lore:
+      - "<lang:gui.settings.state>"
+      - "<lang:gui.settings.toggle>"
+
+  L:
+    material: BARRIER
+    name: "<lang:gui.settings.locked.name>"
+    lore:
+      - "<lang:gui.settings.locked.lore>"
+      - ""
+      - "<lang:gui.settings.reason>"

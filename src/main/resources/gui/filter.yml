@@ -1,0 +1,76 @@
+# Filter menu. The content slots list the filtered items: shift click an item in your own
+# inventory to add it, click one in the list to remove it, and click the mode item to switch
+# between off, whitelist and blacklist.
+#
+# Placeholders in the mode item: <mode> <items>
+
+title: "<lang:gui.filter.title>"
+rows: 6
+
+content-character: "#"
+layout:
+  - "DDDDDDDDD"
+  - "D#######D"
+  - "D#######D"
+  - "D#######D"
+  - "D#######D"
+  - "D<DD D>HB"
+
+# Which slot shows the current mode, and the item used for each mode. The slot is left blank
+# in the layout above, because the menu draws it itself.
+mode:
+  slot: 49
+  disabled-icon: MO
+  whitelist-icon: MW
+  blacklist-icon: MB
+
+items:
+  D:
+    material: GRAY_STAINED_GLASS_PANE
+    hide-tooltip: true
+
+  B:
+    material: ARROW
+    name: "<lang:gui.back.name>"
+    action: back
+
+  '<':
+    material: ARROW
+    name: "<lang:gui.collector.previous-page.name>"
+    action: previous-page
+    show-if: has-previous-page
+    fallback: D
+
+  '>':
+    material: ARROW
+    name: "<lang:gui.collector.next-page.name>"
+    action: next-page
+    show-if: has-next-page
+    fallback: D
+
+  MO:
+    material: LIGHT_GRAY_DYE
+    name: "<lang:gui.filter.mode.name>"
+    lore:
+      - "<lang:gui.filter.mode.lore>"
+      - "<lang:gui.filter.mode.hint>"
+  MW:
+    material: LIME_DYE
+    glow: true
+    name: "<lang:gui.filter.mode.name>"
+    lore:
+      - "<lang:gui.filter.mode.lore>"
+      - "<lang:gui.filter.mode.hint>"
+  MB:
+    material: RED_DYE
+    glow: true
+    name: "<lang:gui.filter.mode.name>"
+    lore:
+      - "<lang:gui.filter.mode.lore>"
+      - "<lang:gui.filter.mode.hint>"
+
+  H:
+    material: NAME_TAG
+    name: "<lang:gui.filter.help.name>"
+    lore:
+      - "<lang:gui.filter.help.lore>"

@@ -1,9 +1,15 @@
+# Build output
 /build
 /bin
-.vscode
+/out
+
+# Gradle
 .gradle
+
+# IDEs
+.idea
+*.iml
+.vscode
+
+# Tooling
 .claude
-ESGUI_wiki.md
-gradlew
-gradlew.bat
-gradle

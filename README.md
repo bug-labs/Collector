@@ -1,94 +1,68 @@
-# 📦 What is Collector?
+# RiftCollector
 
-Collector is a powerful and highly customizable item collection system designed for survival, prison, skyblock, and grinding-based servers.
+Item collectors for Paper that keep their own counted storage, so a single slot can hold a million
+items. Collectors are owned, upgradeable, and can filter, smelt and sell what they pick up.
 
-Collectors automatically gather dropped items and XP within a configurable chunk radius, helping players optimize farms, grinders, and resource generation setups without constant manual collection.
+> **2.0.0 is a full rewrite.** It shares no code with 1.x and is **not** a drop-in upgrade.
+> Read [Upgrading from 1.x](#upgrading-from-1x) before touching a live server.
 
-Every Collector can be upgraded to improve:
+## Features
 
-- Collection Radius
-- Collection Speed
-- Storage Capacity
+- **Counted storage** — a slot counts its items instead of stacking them. Take 1, take a stack, or
+  fill your inventory in a click.
+- **Upgrades** — pickup speed, pickup range, storage slots and items per slot, bought with money.
+- **Auto sell and auto smelt** — sell drops as they are picked up, or smelt them first.
+- **Filters** — whitelist or blacklist exactly what a collector picks up.
+- **Owners and trusted players** — only the owner, players they trust, and staff can open one.
+- **Holograms** — floating text above each collector, using vanilla text displays.
+- **Everything is a config file** — menus are character grids in `gui/`, all text lives in `lang/`,
+  in MiniMessage, `&` codes or hex.
+- **SQLite or MySQL** — collectors, contents, upgrades and settings all persist properly.
 
-Developers can fully configure upgrade tiers, prices, limits, and requirements directly through the config using Vault economy support.
+## Requirements
 
-## 🎮 Core Gameplay
+| | Version |
+|---|---|
+| Paper (or a fork) | 1.21.11 |
+| Java | 21+ |
 
-- Place a Collector anywhere on your island, base, or farm
-- Automatically collect nearby dropped items and XP
-- Upgrade radius, speed, and capacity over time
-- Store millions of items in compressed virtual storage
-- Manage everything through an interactive GUI
-- Enable powerful automation features like Auto Sell or Auto Kill
+Optional: Vault, ExcellentEconomy, ShopGUI+, EconomyShopGUI / +, zItemStacker. Each is explained in
+the [integrations docs](https://iamsamarth.github.io/wiki/riftcollector/integrations/).
 
-Collectors are built to reduce lag, improve automation, and give players a satisfying progression system while remaining fully balanced through permissions and configurable upgrades.
+## Documentation
 
-## ✨ Features
+Full docs — installation, menus, upgrades, abilities, commands, configuration, integrations and an
+FAQ — live at **[iamsamarth.github.io/wiki/riftcollector](https://iamsamarth.github.io/wiki/riftcollector/)**.
 
-1. **Highly Customizable**: Customize configs, GUI item text, messages, upgrade tiers, prices, and nearly every aspect of the plugin.
-2. **Upgradeable System**: Players can upgrade Collector Radius, Speed, and Capacity using fully configurable tiers.
-3. **Infinite Item Storage**: Store millions of the same item type inside a single Collector slot.
-4. **Advanced GUI System**: Withdraw items in custom amounts, manage upgrades, filters, XP, and settings directly from the GUI.
-5. **Chunk Radius Collection**: Collect dropped items from a configurable chunk radius around the Collector.
-6. **Auto Sell System**: Automatically sell collected items for money using Vault economy support.
-7. **Auto Kill Support**: Instantly kill nearby mobs for automated farm setups.
-8. **XP Collection**: Collect dropped XP and withdraw it later directly from the Collector GUI.
-9. **Material Filters**: Add any item/block to whitelist or blacklist collection modes.
-10. **Friend Whitelist**: Allow trusted players to access and manage your Collector.
-11. **Collector Renaming**: Fully rename your Collector for personalization and organization.
-12. **Hologram Support**: Optional holograms displaying Collector information above the block.
-13. **Multiple GUI Pages**: Capacity upgrades unlock additional storage pages for more distinct item types.
-14. **Permission Based Features**: Easily lock premium features like Auto Sell behind ranks or permissions.
-15. **Performance Focused**: Optimized for large farms, grinders, and high player activity.
+## Building
 
-# 🏆 Why Collector?
+```bash
+./gradlew build
+```
 
-Collector is designed to simplify large-scale farming and resource management while still providing meaningful progression and customization.
+The jar lands in `build/libs/`. Java 21 is required; the Gradle wrapper is included.
 
-Instead of relying on overflowing hoppers or lag-heavy item systems, Collectors provide a clean, optimized, and expandable solution for automated collection.
+## Upgrading from 1.x
 
-Whether players are running mob farms, crop farms, grinders, or automated setups, Collector keeps resources organized, efficient, and accessible.
+2.0 is a rewrite, so a server running 1.x should treat it as a new plugin:
 
-# 🔨 Commands & Permissions
+- **The plugin is now named `RiftCollector`.** It reads `plugins/RiftCollector/`, not
+  `plugins/Collector/`, so 1.x configs are not picked up.
+- **Permissions moved to `riftcollector.*`.** Every 1.x `collector.*` node needs replacing in your
+  permission plugin.
+- **1.x collectors are not imported.** The old database is left untouched on disk, so you can roll
+  back by reinstalling 1.x.
+- **Features dropped in this beta:** XP collection and the XP bank, collector renaming,
+  PlaceholderAPI placeholders, WorldGuard region checks, `tiers.yml` (upgrades are now in
+  `config.yml`), the per-player collector limit, and the de/es/fr locales. Only `en_US` ships, and
+  translations are a copy of one file.
 
-| Commands                          | Description                            | Permissions      |
-| --------------------------------- | -------------------------------------- | ---------------- |
-| /collector admin                  | Open the admin management GUI          | collector.admin  |
-| /collector friend add <player>    | Add Collector friends                  | collector.friend |
-| /collector friend list            | List Collector friends                 | collector.friend |
-| /collector friend remove <player> | Remove Collector friends               | collector.friend |
-| /collector give <player> <tier>   | Give a Collector item                  | collector.give   |
-| /collector info                   | View information about your Collectors | collector.use    |
-| /collector wipe                   | Wipe Collector data                    | collector.admin  |
-| /collector reload                 | Reload plugin configuration files      | collector.admin  |
-| /collector rename                 | Rename a Collector you are looking at  | collector.rename |
+Test it on a copy of your world first.
 
-# 🔑 Permissions
+## Support
 
-| Permission        | Description                         |
-| ----------------- | ----------------------------------- |
-| collector.\*      | Access to all Collector permissions |
-| collector.admin   | Administrative permissions          |
-| collector.bypass  | Bypass Collector restrictions       |
-| collector.filter  | Access material filter features     |
-| collector.friend  | Manage Collector friends            |
-| collector.give    | Give Collector items                |
-| collector.rename  | Rename Collectors                   |
-| collector.toggle  | Toggle Collector features           |
-| collector.toggles | Access all Collector toggles        |
-| collector.upgrade | Upgrade Collector stats             |
-| collector.use     | Use Collectors normally             |
-| collector.xp      | Access XP collection features       |
+Questions and bug reports: [Discord](https://discord.com/invite/7hbY4vA4vQ)
 
-Many permissions can be used to create rank-exclusive features.
-For example:
+## License
 
-- Auto Sell only for VIP+
-- XP Collection only for Premium ranks
-- Advanced filters for higher donor tiers
-
-Most permissions required for standard Collector usage are enabled by default for regular players.
-
-# 🎫 Support
-
-> If you need any kind of support or have any questions, Contact me on my [Discord Server](https://discord.com/invite/7hbY4vA4vQ?utm_source=chatgpt.com)
+No license has been chosen for this project yet.
