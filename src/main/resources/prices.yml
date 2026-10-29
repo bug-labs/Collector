@@ -1,0 +1,36 @@
+# Your own sell prices, used by auto sell when CUSTOM is listed in collection.price-providers.
+# With prices here, no shop plugin is needed at all. A price is per single item, so 64 of
+# something sells for 64 times the number below. Remove an item to let the next provider in
+# the list decide, or set it to 0 to make it worthless.
+prices:
+  COBBLESTONE: 0.05
+  STONE: 0.1
+  DIRT: 0.02
+  SAND: 0.05
+  GRAVEL: 0.05
+  COAL: 2.0
+  RAW_IRON: 3.0
+  IRON_INGOT: 4.0
+  RAW_COPPER: 2.0
+  COPPER_INGOT: 2.5
+  RAW_GOLD: 6.0
+  GOLD_INGOT: 8.0
+  REDSTONE: 1.5
+  LAPIS_LAZULI: 2.0
+  DIAMOND: 50.0
+  EMERALD: 40.0
+  QUARTZ: 2.0
+  NETHERITE_SCRAP: 200.0
+  ROTTEN_FLESH: 0.5
+  BONE: 1.0
+  STRING: 1.0
+  GUNPOWDER: 2.0
+  SPIDER_EYE: 2.0
+  ENDER_PEARL: 10.0
+  WHEAT: 1.0
+  POTATO: 0.8
+  CARROT: 0.8
+  SUGAR_CANE: 0.5
+  OAK_LOG: 1.0
+  SPRUCE_LOG: 1.0
+  BIRCH_LOG: 1.0

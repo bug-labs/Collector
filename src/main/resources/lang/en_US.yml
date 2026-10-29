@@ -1,0 +1,255 @@
+# RiftCollector messages. Every piece of text the plugin shows lives in this folder:
+# copy this file to another locale (for example de_DE.yml) and point 'language' in
+# config.yml at its name. Keys you leave out fall back to English, so a translation
+# never has to be complete to be usable.
+#
+# Formatting accepts all three styles, mixed freely in one line:
+#   MiniMessage   <red>, <gradient:#ff0000:#00ff00>, <bold>
+#   legacy codes  &c, &l, &r
+#   legacy hex    &#ff5555
+# <lang:some.key> inserts another message from this file, which is how every message
+# below reuses the prefix.
+# Placeholders are written like <player> and are listed above each message that has any.
+
+prefix: "<gray>[</gray><gold>RiftCollector</gold><gray>]</gray> "
+
+collector:
+  placed: "<lang:prefix><green>Collector placed. It now collects items dropped in this chunk."
+  no-permission: "<lang:prefix><red>You are not allowed to do that here."
+  # <owner>
+  not-owner: "<lang:prefix><red>This collector belongs to <owner>."
+  unknown-owner: "someone else"
+  # <limit>
+  chunk-limit: "<lang:prefix><red>This chunk already has <limit> collector(s). Place it in another chunk."
+  not-empty: "<lang:prefix><red>Empty or sell the contents before taking this collector."
+  picked-up: "<lang:prefix><green>Collector picked up."
+  slot-locked: "<lang:prefix><gray>That slot is not unlocked yet. Buy more storage in Upgrades."
+
+command:
+  no-permission: "<lang:prefix><red>You do not have permission to do that."
+  # <usage>
+  usage: "<lang:prefix><red>Usage: <usage>"
+  specify-player: "<lang:prefix><red>Specify a player: /collector give <player> [amount]"
+  # <name>
+  player-not-online: "<lang:prefix><red>Player <name> is not online."
+  # <value>
+  not-a-number: "<lang:prefix><red><value> is not a number."
+  # <min>, <max>
+  amount-out-of-range: "<lang:prefix><red>Amount must be between <min> and <max>."
+  # <amount>
+  received: "<lang:prefix><green>You received <amount>x Item Collector."
+  # <amount>, <player>
+  given: "<lang:prefix><green>Gave <amount>x Item Collector to <player>."
+  reloaded: "<lang:prefix><green>Configuration reloaded."
+
+# The collector item itself.
+item:
+  name: "<gold>Item Collector"
+  lore:
+    - "<gray>Place it down and it collects every"
+    - "<gray>item that drops inside its range."
+    - ""
+    - "<dark_gray>Right click a placed collector to open it."
+  # Added only when a collector was removed by force, such as an explosion, while it still
+  # had items in it: the contents travel inside the item.
+  contents: "<yellow>Holding <white><items></white> item(s)"
+
+sell:
+  no-permission: "<lang:prefix><red>You are not allowed to sell from a collector."
+  nothing: "<lang:prefix><gray>Nothing in here has a price."
+  # <money>, <items>
+  sold: "<lang:prefix><green>Sold <white><items></white> item(s) for <white><money></white>."
+
+trust:
+  prompt: "<lang:prefix><yellow>Type the player's name in chat, or <white>cancel</white> to stop."
+  cancelled: "<lang:prefix><gray>Nobody was added."
+  # <player>
+  looking-up: "<lang:prefix><gray>Looking up <player>..."
+  # <player>
+  added: "<lang:prefix><green><player> can now use this collector."
+  # <player>
+  removed: "<lang:prefix><yellow><player> can no longer use this collector."
+  # <player>
+  already-trusted: "<lang:prefix><gray><player> is already trusted."
+  already-owner: "<lang:prefix><gray>That is the owner of this collector."
+  # <player>
+  unknown-player: "<lang:prefix><red>No player called <player> could be found."
+  owner-only: "<lang:prefix><red>Only the owner can change the trusted list."
+
+# Hologram lines, configured in config.yml under holograms.lines.
+# <owner> <items> <stored> <capacity> <earnings> <sold>
+hologram:
+  owner: "<gold><owner></gold><gray>'s Collector"
+  stored: "<gray><white><items></white> item(s) <dark_gray>| <gray><stored></gray><dark_gray>/<gray><capacity> slots"
+  earnings: "<gray>Earned <white><earnings>"
+
+update:
+  # <current>, <latest>
+  available: "<lang:prefix><yellow>RiftCollector <white><latest></white> is out; this server runs <white><current></white>."
+
+upgrade:
+  # <upgrade>, <level>
+  purchased: "<lang:prefix><green>Upgraded <upgrade> to <level>."
+  max-level: "<lang:prefix><yellow>That upgrade is already at its highest level."
+  no-permission: "<lang:prefix><red>You are not allowed to buy that upgrade."
+  no-economy: "<lang:prefix><red>No economy plugin is available, so upgrades cannot be bought."
+  not-enough-money: "<lang:prefix><red>You cannot afford that upgrade."
+  # Shown on the item when it cannot be bought, so the reason is never a mystery.
+  reason:
+    none: "<green>Ready to buy"
+    maxed: "<green>Nothing left to buy"
+    no-permission: "<red>You do not have permission for this upgrade"
+    no-economy: "<red>No economy plugin is installed"
+    # <currency>
+    currency-missing: "<red>The <currency> currency is not available"
+  pickup-speed:
+    name: "<aqua>Pickup Speed"
+  pickup-range:
+    name: "<aqua>Pickup Range"
+  slots:
+    name: "<aqua>Storage Slots"
+  slot-capacity:
+    name: "<aqua>Slot Capacity"
+
+ability:
+  # <ability>
+  enabled: "<lang:prefix><green><ability> is now on."
+  disabled: "<lang:prefix><yellow><ability> is now off."
+  no-permission: "<lang:prefix><red>You are not allowed to change that setting."
+  selling-unavailable: "<lang:prefix><red>Auto sell needs an economy and a price source; ask an admin."
+  state-on: "<green>on"
+  state-off: "<red>off"
+  reason:
+    none: "<yellow>Click to toggle"
+    not-trusted: "<red>Only the owner and trusted players may change this"
+    no-permission: "<red>You do not have permission for this setting"
+    no-prices: "<red>No economy or price source is available"
+  auto-sell:
+    name: "<gold>Auto Sell"
+  auto-smelt:
+    name: "<gold>Auto Smelt"
+  hologram:
+    name: "<gold>Hologram"
+
+filter:
+  # <mode>
+  mode-changed: "<lang:prefix><green>Filter mode set to <mode>."
+  # <item>
+  added: "<lang:prefix><green>Added <item> to the filter."
+  # <item>
+  removed: "<lang:prefix><yellow>Removed <item> from the filter."
+  mode:
+    disabled: "<gray>off"
+    whitelist: "<green>whitelist"
+    blacklist: "<red>blacklist"
+
+# Menu text. The layout of each menu lives in gui/, which references these keys.
+# Lore is split into separate keys on purpose: one short line each reads far better in game
+# than one long line the client wraps wherever it likes.
+gui:
+  # Lore shown under a stored stack. <amount> is the real count, <stack-cap> the slot limit.
+  stack:
+    amount: "<gray>Stored <white><amount></white> <dark_gray>of <gray><stack-cap>"
+    actions: "<dark_gray>Left take 64 <gray>| <dark_gray>Right take 1 <gray>| <dark_gray>Shift fill"
+  back:
+    name: "<yellow>Back"
+
+  collector:
+    title: "<dark_gray>Collector <gray>(<white><page></white>/<white><pages></white>)"
+    info:
+      name: "<gradient:#ffd479:#ffa726>Collector</gradient>"
+      page: "<gray>Page <white><page></white> of <white><pages></white>"
+      slots: "<gray>Slots used <white><stored></white>/<white><capacity></white>"
+      items: "<gray>Items stored <white><items></white>"
+    next-page:
+      name: "<yellow>Next page"
+      lore: "<gray>Go to page <white><next-page></white>"
+    previous-page:
+      name: "<yellow>Previous page"
+      lore: "<gray>Go to page <white><previous-page></white>"
+    locked-slot:
+      name: "<dark_gray>Locked slot"
+      lore-1: "<gray>This slot is not unlocked yet."
+      lore-2: "<yellow>Buy more storage in Upgrades."
+    sell:
+      name: "<green>Sell Contents"
+      lore-1: "<gray>Sells everything in here that"
+      lore-2: "<gray>a shop or the price list will buy."
+      lore-3: "<yellow>Worth now: <white><value>"
+    pickup:
+      name: "<aqua>Pick Up Collector"
+      lore-1: "<gray>Takes the collector back into"
+      lore-2: "<gray>your inventory. It has to be empty."
+      lore-3: "<gray>Holding <white><items></white> item(s)"
+    trust:
+      name: "<light_purple>Trusted Players"
+      lore-1: "<gray>Let friends open this collector"
+      lore-2: "<gray>and move items in and out of it."
+      lore-3: "<gray>Trusted: <white><trusted>"
+    upgrades:
+      name: "<aqua>Upgrades"
+      lore-1: "<gray>Sweep faster, reach further and"
+      lore-2: "<gray>hold more in every slot."
+    settings:
+      name: "<gold>Settings"
+      lore-1: "<gray>Auto sell, auto smelt and the"
+      lore-2: "<gray>hologram above the collector."
+    filter:
+      name: "<yellow>Filter"
+      lore-1: "<gray>Choose exactly which items this"
+      lore-2: "<gray>collector is allowed to pick up."
+
+  upgrades:
+    title: "<dark_gray>Collector Upgrades"
+    # One lore line each, so a menu file can leave any of them out.
+    # <level>, <max-level>, <value>, <next-value>, <cost>
+    level: "<gray>Level <white><level></white><dark_gray>/<gray><max-level>"
+    current: "<gray>Now <white><value>"
+    next: "<gray>After upgrading <white><next-value>"
+    buy: "<yellow>Click to buy for <white><cost>"
+    maxed: "<green>Fully upgraded"
+    reason: "<lang:upgrade.reason.none>"
+    locked:
+      name: "<red>Locked"
+      lore: "<gray>This upgrade is not available to you."
+    # The storage upgrade is bought as you go, so it has its own lines.
+    # <level> slots now, <max-level> the most possible, <pages> pages unlocked,
+    # <page-size> slots per page, <bulk> what a right click buys.
+    slots:
+      lore-1: "<gray>Unlocked <white><level></white><dark_gray>/<gray><max-level> slots"
+      lore-2: "<gray>That is <white><pages></white> page(s) of <white><page-size></white>."
+      buy-one: "<yellow>Left click <gray>+1 slot <dark_gray>(<gray><cost-one><dark_gray>)"
+      buy-bulk: "<yellow>Right click <gray>+<bulk> slots <dark_gray>(<gray><cost-bulk><dark_gray>)"
+      buy-page: "<yellow>Shift + left <gray>+1 page <dark_gray>(<gray><cost-page><dark_gray>)"
+
+  settings:
+    title: "<dark_gray>Collector Settings"
+    state: "<gray>Currently <state>"
+    earnings: "<gray>Earned <white><earnings></white> from <white><sold></white> item(s)"
+    toggle: "<yellow>Click to toggle"
+    reason: "<lang:ability.reason.none>"
+    locked:
+      name: "<red>Locked"
+      lore: "<gray>This setting is not available to you."
+
+  filter:
+    title: "<dark_gray>Collector Filter"
+    mode:
+      name: "<yellow>Filter mode"
+      lore: "<gray>Currently <mode> <dark_gray>(<gray><items> item(s)<dark_gray>)"
+      hint: "<yellow>Click to change"
+    help:
+      name: "<aqua>How this works"
+      lore: "<gray>Shift click an item in your inventory to add it, click one here to remove it."
+
+  trust:
+    title: "<dark_gray>Trusted Players"
+    entry:
+      name: "<white><player>"
+      lore-1: "<gray>Can open this collector and move"
+      lore-2: "<red>Click to remove"
+    add:
+      name: "<green>Add a player"
+      lore-1: "<gray>Type a name in chat to let someone"
+      lore-2: "<gray>else use this collector."
+      lore-3: "<gray>Trusted: <white><trusted>"

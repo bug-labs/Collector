@@ -1,0 +1,153 @@
+# Collector menu. Every collector opens this same menu, whatever block it was placed as.
+#
+# Text here is MiniMessage, and <lang:some.key> pulls a string from the language file, which
+# is how the shipped menu stays translatable. Inline text works too if you prefer.
+#
+# Placeholders usable in 'title', 'name' and 'lore':
+#   <page> <pages> <next-page> <previous-page>
+#   <stored> <capacity> <free> <items>
+
+title: "<lang:gui.collector.title>"
+rows: 6
+
+# One line per row, 9 characters each.
+#   '#' is a content slot: collected items live here, filled in storage order.
+#   ' ' leaves the slot empty.
+#   every other character needs an entry under 'items'.
+content-character: "#"
+# Shown in content slots this collector has not unlocked yet. Remove the line to leave
+# locked slots empty instead.
+locked-slot-icon: "X"
+layout:
+  - "DDDDDDDDD"
+  - "D#######D"
+  - "D#######D"
+  - "D#######D"
+  - "D#######D"
+  - "USF<I>TVP"
+
+# What a click on a stored stack does. Collectors count items rather than using vanilla
+# stacks, so taking items out is always a deliberate action:
+#   take-one          one item
+#   take-stack        one vanilla stack, so 64 of most things
+#   fill-inventory    as much as the player can carry
+#   none              nothing
+# Any click name works: left, right, shift-left, shift-right, middle, number-key, drop,
+# control-drop, swap-offhand.
+content-clicks:
+  left: take-stack
+  right: take-one
+  shift-left: fill-inventory
+
+# Lore added under every stored stack. <amount> is the real count, <stack-cap> the limit
+# of one slot. Remove the lines to leave stored items looking untouched.
+content-item:
+  lore:
+    - ""
+    - "<lang:gui.stack.amount>"
+    - "<lang:gui.stack.actions>"
+
+# Per item options:
+#   material        required, any item material
+#   amount          stack size shown, default 1
+#   name            display name, omit to keep the vanilla name
+#   lore            list of lore lines
+#   hide-tooltip    true hides the whole tooltip, for fillers and decoration
+#   glow            true adds the enchantment glint
+#   item-model      resource pack item model, e.g. "myserver:collector_next"
+#   action          none (default), next-page, previous-page, close,
+#                   open-upgrades, open-settings, open-filter, back
+#   show-if         always (default), has-next-page, has-previous-page,
+#                   has-items, is-empty, is-full; prefix with ! to invert
+#   fallback        character of the item to show instead when show-if fails
+items:
+  D:
+    material: GRAY_STAINED_GLASS_PANE
+    hide-tooltip: true
+
+  X:
+    material: GRAY_DYE
+    name: "<lang:gui.collector.locked-slot.name>"
+    lore:
+      - "<lang:gui.collector.locked-slot.lore-1>"
+      - "<lang:gui.collector.locked-slot.lore-2>"
+
+  V:
+    material: EMERALD
+    name: "<lang:gui.collector.sell.name>"
+    lore:
+      - "<lang:gui.collector.sell.lore-1>"
+      - "<lang:gui.collector.sell.lore-2>"
+      - ""
+      - "<lang:gui.collector.sell.lore-3>"
+    action: sell-all
+
+  P:
+    material: SHULKER_BOX
+    name: "<lang:gui.collector.pickup.name>"
+    lore:
+      - "<lang:gui.collector.pickup.lore-1>"
+      - "<lang:gui.collector.pickup.lore-2>"
+      - ""
+      - "<lang:gui.collector.pickup.lore-3>"
+    action: pickup
+
+  T:
+    material: PLAYER_HEAD
+    name: "<lang:gui.collector.trust.name>"
+    lore:
+      - "<lang:gui.collector.trust.lore-1>"
+      - "<lang:gui.collector.trust.lore-2>"
+      - ""
+      - "<lang:gui.collector.trust.lore-3>"
+    action: open-trust
+
+  U:
+    material: ANVIL
+    name: "<lang:gui.collector.upgrades.name>"
+    lore:
+      - "<lang:gui.collector.upgrades.lore-1>"
+      - "<lang:gui.collector.upgrades.lore-2>"
+    action: open-upgrades
+
+  S:
+    material: COMPARATOR
+    name: "<lang:gui.collector.settings.name>"
+    lore:
+      - "<lang:gui.collector.settings.lore-1>"
+      - "<lang:gui.collector.settings.lore-2>"
+    action: open-settings
+
+  F:
+    material: HOPPER
+    name: "<lang:gui.collector.filter.name>"
+    lore:
+      - "<lang:gui.collector.filter.lore-1>"
+      - "<lang:gui.collector.filter.lore-2>"
+    action: open-filter
+
+  I:
+    material: HOPPER
+    name: "<lang:gui.collector.info.name>"
+    lore:
+      - "<lang:gui.collector.info.page>"
+      - "<lang:gui.collector.info.slots>"
+      - "<lang:gui.collector.info.items>"
+
+  '<':
+    material: ARROW
+    name: "<lang:gui.collector.previous-page.name>"
+    lore:
+      - "<lang:gui.collector.previous-page.lore>"
+    action: previous-page
+    show-if: has-previous-page
+    fallback: D
+
+  '>':
+    material: ARROW
+    name: "<lang:gui.collector.next-page.name>"
+    lore:
+      - "<lang:gui.collector.next-page.lore>"
+    action: next-page
+    show-if: has-next-page
+    fallback: D

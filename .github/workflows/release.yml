@@ -1,0 +1,71 @@
+name: Release
+
+# Tag a commit to cut a release:
+#   git tag v2.0.0-beta.1 && git push origin v2.0.0-beta.1
+#
+# The version in the tag must match the one in gradle.properties, which this checks before
+# building, so a release can never carry a jar numbered differently from its tag. A tag with a
+# hyphen in it (-beta.1, -rc.2) is published as a prerelease.
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Existing tag to build a release from (e.g. v2.0.0-beta.1)'
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.tag || github.ref }}
+          fetch-depth: 0
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Work out the version
+        id: version
+        run: |
+          TAG="${{ github.event.inputs.tag || github.ref_name }}"
+          TAG_VERSION="${TAG#v}"
+          PROJECT_VERSION="$(grep -E '^version=' gradle.properties | cut -d= -f2 | tr -d '[:space:]')"
+
+          if [ "$TAG_VERSION" != "$PROJECT_VERSION" ]; then
+            echo "::error::Tag $TAG says $TAG_VERSION but gradle.properties says $PROJECT_VERSION."
+            echo "::error::Update gradle.properties, or tag the right commit."
+            exit 1
+          fi
+
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          echo "version=$TAG_VERSION" >> "$GITHUB_OUTPUT"
+          # Anything with a hyphen is a pre-release: -beta.1, -rc.2, -dev
+          case "$TAG_VERSION" in
+            *-*) echo "prerelease=true" >> "$GITHUB_OUTPUT" ;;
+            *)   echo "prerelease=false" >> "$GITHUB_OUTPUT" ;;
+          esac
+
+      - name: Build
+        run: ./gradlew build --no-daemon
+
+      - name: Publish the release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.version.outputs.tag }}
+          name: RiftCollector ${{ steps.version.outputs.version }}
+          prerelease: ${{ steps.version.outputs.prerelease }}
+          generate_release_notes: true
+          fail_on_unmatched_files: true
+          files: build/libs/RiftCollector-${{ steps.version.outputs.version }}.jar

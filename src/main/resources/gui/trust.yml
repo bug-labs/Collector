@@ -1,0 +1,63 @@
+# Trust menu: the players allowed to use this collector besides its owner.
+# Content slots list the trusted players, one head each. Clicking a head removes that player.
+#
+# Placeholders: <trusted> in any item, <player> in the list item.
+
+title: "<lang:gui.trust.title>"
+rows: 6
+
+content-character: "#"
+layout:
+  - "DDDDDDDDD"
+  - "D#######D"
+  - "D#######D"
+  - "D#######D"
+  - "D#######D"
+  - "D<DDADD>B"
+
+# The item drawn for each trusted player. It is not part of the layout above: the menu puts one
+# in every content slot it needs. A player head is filled in with that player's skin.
+list:
+  icon: "H"
+
+items:
+  D:
+    material: GRAY_STAINED_GLASS_PANE
+    hide-tooltip: true
+
+  H:
+    material: PLAYER_HEAD
+    name: "<lang:gui.trust.entry.name>"
+    lore:
+      - "<lang:gui.trust.entry.lore-1>"
+      - ""
+      - "<lang:gui.trust.entry.lore-2>"
+
+  A:
+    material: WRITABLE_BOOK
+    name: "<lang:gui.trust.add.name>"
+    lore:
+      - "<lang:gui.trust.add.lore-1>"
+      - "<lang:gui.trust.add.lore-2>"
+      - ""
+      - "<lang:gui.trust.add.lore-3>"
+    action: trust-add
+
+  B:
+    material: ARROW
+    name: "<lang:gui.back.name>"
+    action: back
+
+  '<':
+    material: ARROW
+    name: "<lang:gui.collector.previous-page.name>"
+    action: previous-page
+    show-if: has-previous-page
+    fallback: D
+
+  '>':
+    material: ARROW
+    name: "<lang:gui.collector.next-page.name>"
+    action: next-page
+    show-if: has-next-page
+    fallback: D

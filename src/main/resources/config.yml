@@ -1,70 +1,152 @@
-# =============================================================
-#                   Collector — config.yml
-# =============================================================
-# Every behavior is configurable. See also: tiers.yml, gui.yml, lang/*.yml.
-# =============================================================
+# Language file to use from the lang/ folder, without the .yml extension.
+# Every message and menu string lives there, so a translation needs no changes here.
+language: en_US
 
-# Active language. Drop a custom <code>.yml file into the lang/ folder
-# (created on first run) and set this to the file's name (without .yml).
-# Bundled: en, de, es, fr.
-language: en
+# The block a collector is placed as. Any placeable block works: collectors keep their own
+# storage, so the block is only the skin. Its name and lore come from the language file.
+item:
+  material: HOPPER
 
-collection:
-  # Whether the Collector also absorbs experience orbs (per-collector toggle remains).
-  xp-enabled: true
-  # Bukkit only exposes Chunk#getEntities(), so this radius is informational only —
-  # the per-tier "range" setting (in chunks) controls actual scan area.
-  xp-scan-radius: 8
+storage:
+  # SQLITE keeps everything in plugins/RiftCollector/data.db and needs no setup.
+  # MYSQL uses the connection below, for sharing collectors across a network.
+  type: SQLITE
+  mysql:
+    host: localhost
+    port: 3306
+    database: riftcollector
+    username: root
+    password: ""
+    pool-size: 6
+    use-ssl: false
+  # How often changed collectors are written to the database, in seconds.
+  save-interval-seconds: 300
+  # Imports collectors from versions that stored them in chunk data. Safe to turn off
+  # once every world has been visited at least once on this version.
+  import-legacy-chunk-data: true
 
 limits:
-  # -1 = no limit
-  max-collectors-per-player: 10
-  # Worlds in which Collectors cannot be placed.
-  blocked-worlds: []
-  # Block placing more than one Collector inside the same chunk.
-  one-per-chunk: true
-  # Refuse pickup when storage holds more than this many items total.
-  # Prevents lag spikes from dumping huge stacks on the floor at once.
-  # -1 disables the check. Bypass perm: collector.bypass.pickuplimit
-  pickup-max-items: 100000
+  # How many collectors may be placed in one chunk.
+  collectors-per-chunk: 1
 
-hologram:
+collection:
+  # CHUNK  - the pickup range upgrade counts chunks around the collector's own chunk.
+  # RADIUS - the pickup range upgrade counts blocks, ignoring chunk borders.
+  range-type: CHUNK
+  # Item types collectors leave on the ground.
+  ignored-materials: [ ]
+  # Where auto sell looks for prices, in order. CUSTOM is prices.yml, the others are the
+  # shop plugins; anything not installed is skipped.
+  price-providers:
+    - CUSTOM
+    - SHOPGUI_PLUS
+    - ECONOMY_SHOP_GUI
+  # The currency auto sell and the sell button pay out in. Empty uses economy.default-currency.
+  sell-currency: ""
+
+# Money. Prices anywhere in this file may name a currency; the first provider below that knows
+# that name handles it, so upgrades can cost gems while selling pays out coins.
+economy:
+  providers:
+    - EXCELLENT_ECONOMY   # any currency defined in ExcellentEconomy, by its id
+    - VAULT               # the single currency Vault exposes
+  # Used whenever a price does not name a currency. Empty means Vault, or ExcellentEconomy's
+  # currency of that name if you set one.
+  default-currency: ""
+
+holograms:
+  # Floating text above every collector, drawn with vanilla text displays. No hologram plugin
+  # is needed, and players can switch theirs off in the collector's Settings menu.
   enabled: true
-  # Block-relative Y offset for the TextDisplay (1.4 = just above the hopper rim).
-  y-offset: 1.4
-  # How often the floating text refreshes (ticks). 40 = 2s.
-  refresh-interval-ticks: 40
+  # How far above the block the text floats.
+  offset-y: 1.4
+  # How often the text is redrawn, in seconds.
+  update-interval-seconds: 5
+  # Lines of the hologram. Placeholders: <owner> <items> <stored> <capacity> <earnings> <sold>
+  lines:
+    - "<lang:hologram.owner>"
+    - "<lang:hologram.stored>"
+  # The text display entity itself, so a hologram can look however you want it to.
+  style:
+    text-shadow: true
+    # Lets the text show through blocks.
+    see-through: false
+    # FIXED, VERTICAL, HORIZONTAL or CENTER: which way the text turns to face players.
+    billboard: CENTER
+    # LEFT, RIGHT or CENTER.
+    alignment: CENTER
+    scale: 1.0
+    line-width: 200
+    # 1-255, or -1 to leave the text fully opaque.
+    text-opacity: -1
+    background:
+      enabled: false
+      color: "#000000"
+      # 0-255, only used when the background is enabled.
+      opacity: 64
+    # 0-15 for a fixed light level, or -1 to follow the light of the block.
+    brightness: -1
+    # Multiplies how far away the hologram stays visible.
+    view-range: 1.0
 
-visuals:
-  place:
-    particle: HAPPY_VILLAGER
-    sound: BLOCK_AMETHYST_BLOCK_CHIME
-  link:
-    particle: ENCHANT
-    sound: BLOCK_BEACON_ACTIVATE
-  upgrade:
-    particle: WAX_ON
-    sound: ENTITY_PLAYER_LEVELUP
-  full-storage:
-    particle: SMOKE
-    sound: BLOCK_NOTE_BLOCK_BASS
-  pickup:
-    particle: NONE
-    sound: NONE
+updates:
+  enabled: true
+  # The Modrinth project slug or id to check. Leave empty to turn checking off.
+  project: ""
+  check-interval-hours: 6
+  # Tells players with the permission below when they join that an update is out.
+  notify-on-join: true
+  notify-permission: riftcollector.update-notify
 
-database:
-  file: data.db
-  threads: 1
-  # How often (in ticks) the async batched flush runs. 100 ticks = 5s.
-  flush-interval-ticks: 100
+# What a collector can be upgraded to. Level 0 is what a freshly placed collector has, and
+# every later level is bought with money. Add or remove levels freely.
+# 'permission' on a level restricts it beyond riftcollector.upgrade.<upgrade>.
+# 'currency' on a level charges it in that currency instead of the default one.
+upgrades:
 
-hooks:
-  vault: true
-  placeholderapi: true
-  # EconomyShopGUI / EconomyShopGUI-Premium are auto-detected.
-  economyshopgui: true
-  worldguard:
-    enabled: false
-    flag: collector-place
+  # Ticks between sweeps. Lower is faster; 20 ticks is one second.
+  pickup-speed:
+    levels:
+      - { value: 40, cost: 0 }
+      - { value: 20, cost: 25000 }
+      - { value: 10, cost: 100000 }
+      - { value: 5, cost: 400000 }
 
-debug: false
+  # 'value' is used when range-type is CHUNK and counts chunks around the collector's chunk.
+  # 'radius' is used when range-type is RADIUS and counts blocks.
+  pickup-range:
+    levels:
+      - { value: 0, radius: 12, cost: 0 }
+      - { value: 1, radius: 24, cost: 50000 }
+      - { value: 2, radius: 48, cost: 250000 }
+
+  # Storage, which is bought as you go rather than in fixed levels.
+  #   SLOT - players buy single slots, the bulk amount, or a whole page at a time.
+  #          A page that is only partly unlocked shows the locked-slot item from
+  #          gui/collector.yml in the slots that are not paid for yet.
+  #   PAGE - players buy one whole page at a time, so a page is either there or it is not.
+  slots:
+    mode: SLOT
+    # Charge storage in a currency of its own. Empty uses economy.default-currency.
+    currency: ""
+    slot:
+      start: 7
+      max: 84
+      cost-per-slot: 2500
+      # What a right click buys in one go.
+      bulk: 7
+    page:
+      start: 1
+      max: 3
+      cost-per-page: 60000
+
+  # How many items one slot can hold. Collectors count items instead of using vanilla stacks,
+  # so this can go far beyond 64. Lowering it leaves anything already stored in place, out of
+  # reach, until it is raised again.
+  slot-capacity:
+    levels:
+      - { value: 10000, cost: 0 }
+      - { value: 100000, cost: 75000 }
+      - { value: 1000000, cost: 500000 }
+      # A level can be priced in another currency, for example:
+      # - { value: 5000000, cost: 250, currency: gems }
